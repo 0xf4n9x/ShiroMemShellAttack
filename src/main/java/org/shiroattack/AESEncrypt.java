@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 public class AESEncrypt {
 
     public static String encrypt(byte[] data, byte[] key, String mode) throws Exception {
-        if (mode == "CBC") {
+        if ("CBC".equals(mode)) {
             return encryptCBC(data, key);
         }
 

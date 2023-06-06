@@ -80,7 +80,6 @@ public class Gadgets {
         return field.get(obj);
     }
 
-
     public static String toBase64(Class clazz) throws Exception {
         ClassPool aDefault = ClassPool.getDefault();
         CtClass ctClass = aDefault.get(FilterMemShell.class.getName());
