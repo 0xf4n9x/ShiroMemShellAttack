@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FilterMemShell implements Filter {
     public HttpServletRequest request = null;
     public HttpServletResponse response = null;
+    public String path;
 
     public boolean equals(Object obj) {
         this.getReqResp(obj);
@@ -103,8 +104,9 @@ public class FilterMemShell implements Filter {
                 Object filterMap = filterMapClass.newInstance();
                 filterMap.getClass().getDeclaredMethod("setFilterName", new Class[]{String.class}).invoke(filterMap, new Object[]{filterName});
                 filterMap.getClass().getDeclaredMethod("setDispatcher", new Class[]{String.class}).invoke(filterMap, new Object[]{DispatcherType.REQUEST.name()});
+                if (path == null || path.length() == 0) {path = "/*";}
                 filterMap.getClass().getDeclaredMethod("addURLPattern",
-                        new Class[]{String.class}).invoke(filterMap, new Object[]{"/*"});
+                        new Class[]{String.class}).invoke(filterMap, new Object[]{path});
 
                 //调用 addFilterMapBefore 会自动加到队列的最前面，不需要原来的手工去调整顺序了
                 standardContext.getClass().getDeclaredMethod("addFilterMapBefore", new Class[]{filterMapClass}).invoke(standardContext, new Object[]{filterMap});
